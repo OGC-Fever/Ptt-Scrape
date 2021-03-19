@@ -1,0 +1,54 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title>PTT Scraper</title>
+<script src="{{ url_for('static',filename='ptt/ptt_ajax_load.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_ajax_post.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_ajax_search.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_hot.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_page.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_ajax.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="row col-11 my-2 mx-auto">
+    <div class="col-3">
+        <form class="mx-1" id="ptt_search" onsubmit="ajax_post();return false;">
+            <input class="form-control my-1" type="search" id="board" placeholder="Board">
+            <input class="form-control my-1" type="search" id="keyword" placeholder="Keyword">
+            <input class="form-control my-1" type="search" id="author" placeholder="Author">
+            <input class="form-control my-1" type="number" id="count" placeholder="Count">
+            <input class="col-5 btn btn-primary" type="submit" value="Search">
+            <input class="col-5 search_reset btn btn-secondary" type="button" value="Reset">
+        </form>
+    </div>
+    <div class="col-9 my-1 mx-auto">
+        <div class="card bg-dark text-ligth">
+            <table class="table table-dark table-hover table-striped my-0 py-1">
+                <thead id="get_header">
+                    <tr>
+                        <th class="col-1">No.</th>
+                        <th class="col-2">Board</th>
+                        <th class="col">Title</th>
+                    </tr>
+                </thead>
+                <thead id="post_header">
+                    <tr>
+                        <th class="col-1">No.</th>
+                        <th class="col-1">Hot</th>
+                        <th class="col">Title</th>
+                        <th class="col-1">Author</th>
+                        <th class="col-1">Date</th>
+                    </tr>
+                </thead>
+                <tbody id="ajax_board">
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-1">
+            <ul id="ajax_pagination" class="pagination offset-1 my-1">
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
