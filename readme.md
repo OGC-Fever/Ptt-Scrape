@@ -6,7 +6,7 @@ Personal side projects just for fun & practice
 ## Photo Board 
 - demo http://orzogc.ddns.net/msg 
 - post and comment photo messages
-- packages : flask, sqlite3, sqlalchemy, PIL
+- packages : flask, sqlite3, sqlalchemy, pillow
 - ajax : scroll down to get more photo
 - storing all data in sqlite database w/ sqlalchemy
 - resizing photo in PIL
