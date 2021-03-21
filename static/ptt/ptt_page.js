@@ -8,25 +8,20 @@ function ajax_pagination(json, page_n) {
     }
     for (let item = 1; item <= page_count; item++) {
         if (item == 1) {
-            $('#ajax_pagination').append(`
+            $('#ajax_pagination').prepend(`
                 <li class="page-item">
                     <a class="page-link" href="#" id="page_nav_start">|<</a>
                 </li>`
             );
         }
         if (Math.abs(item - page_n) <= 4) {
+            $('#ajax_pagination').append(`
+                <li class="page-item">
+                    <a class="page-link" href="#" id="page_nav_${item}">${item}</a>
+                </li>`
+            );
             if (item == page_n) {
-                $('#ajax_pagination').append(`
-                    <li class="page-item active">
-                        <a class="page-link" href="#" id="page_nav_${item}">${item}</a>
-                    </li>`
-                );
-            } else {
-                $('#ajax_pagination').append(`
-                    <li class="page-item">
-                        <a class="page-link" href="#" id="page_nav_${item}">${item}</a>
-                    </li>`
-                );
+                $(`#page_nav_${item}`).parent().addClass("active");
             }
         }
         if (item == page_count) {
@@ -36,26 +31,19 @@ function ajax_pagination(json, page_n) {
                 </li>`
             );
         }
-        $(`#page_nav_${item}`).click(function () {
-            if (flag == 0) {
-                ajax_load(item);
-            } else {
-                ajax_post(item)
-            }
-        });
     }
-    $("#page_nav_start").click(function () {
-        if (flag == 0) {
-            ajax_load(1);
+    $("[id^=page_nav_]").on("click", function () {
+        if ($(this).attr("id").includes("start")) {
+            item = 1;
+        } else if ($(this).attr("id").includes("end")) {
+            item = page_count
         } else {
-            ajax_post(1)
+            item = $(this).attr("id").split("_").slice(-1)
         }
-    });
-    $("#page_nav_end").click(function () {
         if (flag == 0) {
-            ajax_load(page_count);
+            ajax_load(item);
         } else {
-            ajax_post(page_count)
+            ajax_post(item);
         }
-    });
+    })
 }
