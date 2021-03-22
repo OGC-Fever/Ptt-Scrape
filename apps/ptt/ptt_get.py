@@ -35,11 +35,14 @@ def get_list(html):
 def get_content(html):
     data = []
     for item in html.find_all("div", class_="r-ent"):
-        data.append([item.a.text,
-                     item.a["href"].split("/", 2)[-1],
-                     item.find("div", {"class": "date"}).text,
-                     item.find("div", {"class": "nrec"}).text,  # push
-                     item.find("div", {"class": "author"}).text])
+        try:
+            data.append([item.a.text,
+                         item.a["href"].split("/", 2)[-1],
+                         item.find("div", {"class": "date"}).text,
+                         item.find("div", {"class": "nrec"}).text,  # push
+                         item.find("div", {"class": "author"}).text])
+        except:
+            pass
     return data
 
 

@@ -15,11 +15,11 @@
     <div class="col-3">
         <form class="mx-1" id="ptt_search" onsubmit="ajax_post();return false;">
             <div class="form-floating my-1">
-                <input class="form-control" type="text" id="board" placeholder="Board">
+                <input class="form-control" value="Beauty" type="text" id="board" placeholder="Board">
                 <label for="board">Board</label>
             </div>
             <div class="form-floating my-1">
-                <input class="form-control" type="text" id="keyword" placeholder="Keyword">
+                <input class="form-control" value="正妹" type="text" id="keyword" placeholder="Keyword">
                 <label for="keyword">Keyword</label>
             </div>
             <div class="form-floating my-1">
@@ -27,13 +27,13 @@
                 <label for="author">Author</label>
             </div>
             <div class="form-floating my-1">
-                <input class="form-control" type="number" min=0 max=100 step=5 id="push" placeholder="Push">
-                <label for="push">Push</label>
-            </div>
-            <div class="form-floating my-1">
                 <input class="form-control" value=10 type="number" min=10 max=1000 step=10 id="count"
                     placeholder="Count">
                 <label for="count">Count</label>
+            </div>
+            <div class="form-floating my-1">
+                <input class="form-control" type="number" min=0 max=100 step=5 id="push" placeholder="Push">
+                <label for="push">Push</label>
             </div>
             <div class="btn-toolbar mx-auto">
                 <input class="justify-content-center col me-1 btn-group btn btn-primary" type="submit" value="Search">
