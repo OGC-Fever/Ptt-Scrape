@@ -26,15 +26,13 @@ def search_more(page, url, board, query_prms, cookies, data):
     return data
 
 
-def json_append(json, item, url):
-    if item[3] == "爆":
-        item[3] = "99+"
-    json.append({"title": item[0],
-                 "url": f"{url}/{item[1]}",
-                 "push": item[3],
-                 "author": item[4],
-                 "date": item[2].strip()})
-    return json
+def prms_asm(keyword, author, push):
+    if author:
+        author = "author:" + author
+    if push:
+        push = "recommend:" + push
+    prms = "+".join([keyword, author, push])
+    return prms
 
 
 @ptt_app.route("/search", methods=["POST"])
@@ -44,19 +42,13 @@ def ptt_search():
     author = request.form['author']
     push = request.form['push']
     count = request.form['count']
-    query_prms = ""
     if not count:
         count = 10
     else:
         count = int(count)
     if not board:
         board = "allpost"
-    if keyword and author:
-        query_prms = f"{keyword}+author:{author}"
-    if keyword and not author:
-        query_prms = f"{keyword}"
-    if not keyword and author:
-        query_prms = f"author:{author}"
+    query_prms = prms_asm(keyword, author, push)
     if not keyword and not author:
         return render_template("ptt/ptt.html")
     url = "https://www.ptt.cc/bbs"
@@ -71,17 +63,12 @@ def ptt_search():
     for item in data:
         if len(json) >= count:
             break
-        if push and int(push) > 0:
-            push = int(push)
-            if item[3] == "爆" or (item[3].isnumeric() and int(item[3]) >= push):
-                json = json_append(json, item, url)
-        if not push or int(push) == 0:
-            json = json_append(json, item, url)
+        if item[3] == "爆":
+            item[3] = "99+"
+        json.append({"title": item[0],
+                     "url": f"{url}/{item[1]}",
+                     "push": item[3],
+                     "author": item[4],
+                     "date": item[2].strip()})
     json.append(len(json))
-    # if len(data) >= count:
-    #     data = data[:count]
-    # else:  # len(data) < count
-    #     page = math.ceil(count/20)
-    #     data = search_more(page, url, board, query_prms, cookies, data)
-
     return jsonify(json)

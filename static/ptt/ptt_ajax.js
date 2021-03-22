@@ -14,6 +14,7 @@ $(document).ready(function () {
         $('#board').val("");
         $('#keyword').val("");
         $('#author').val("");
+        $('#push').val("");
         $('#count').val("");
     })
 });

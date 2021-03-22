@@ -14,7 +14,7 @@ function ajax_pagination(json, page_n) {
                 </li>`
             );
         }
-        if (Math.abs(item - page_n) <= 4) {
+        if (Math.abs(item - page_n) <= 3) {
             $('#ajax_pagination').append(`
                 <li class="page-item">
                     <a class="page-link" href="#" id="page_nav_${item}">${item}</a>

@@ -42,7 +42,7 @@ def get_content(html):
                          item.find("div", {"class": "nrec"}).text,  # push
                          item.find("div", {"class": "author"}).text])
         except:
-            pass
+            pass  # ignore nonetype error
     return data
 
 
