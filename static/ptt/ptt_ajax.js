@@ -1,5 +1,5 @@
 var init = 0;
-var flag = 0;//0:get 1:post
+var flag = 0; // 0:get 1:post
 var init_ajax_load = 0;
 var init_ajax_post = 0;
 var mem_store;

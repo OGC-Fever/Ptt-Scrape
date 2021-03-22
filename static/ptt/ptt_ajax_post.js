@@ -2,14 +2,16 @@ function ajax_post(page_n) {
     var board = $("#board").val();
     var keyword = $("#keyword").val();
     var author = $("#author").val();
+    var push = $("#push").val();
     var count = $("#count").val();
     var prms = {
         "board": board,
         "keyword": keyword,
         "author": author,
+        "push": push,
         "count": count
     }
-    var action = function (mem_store, page_n) {
+    function action(mem_store, page_n) {
         $("#get_header").hide();
         $("#post_header").show();
         $('#ajax_board').html("");

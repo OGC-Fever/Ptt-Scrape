@@ -38,7 +38,7 @@ def get_content(html):
         data.append([item.a.text,
                      item.a["href"].split("/", 2)[-1],
                      item.find("div", {"class": "date"}).text,
-                     item.find("div", {"class": "nrec"}).text,
+                     item.find("div", {"class": "nrec"}).text,  # push
                      item.find("div", {"class": "author"}).text])
     return data
 

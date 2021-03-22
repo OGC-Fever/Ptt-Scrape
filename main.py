@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.exceptions import NotFound
 
