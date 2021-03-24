@@ -1,13 +1,14 @@
 $(document).ready(function () {
-    var modal = document.getElementById('replyModal')
-    modal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget
-        var name = button.getAttribute('name')
-        var title = modal.querySelector('.modal-title')
-        var msg = modal.querySelector('.modal-body textarea')
-        if (name) {
-            title.textContent = 'Reply to : ' + name
-            msg.value = "@" + name + "\n"
-        }
+    $(".btn").filter(".btn-outline-warning").click(function () {
+        let name = $(this).attr("name")
+        $("textarea").text(`@${name}\n`)
+        $(".modal-title").text(`Reply to : ${name}`)
+        $("#replyModal").modal("show")
+    })
+
+    $(".fab").filter(".reply").click(function () {
+        $("textarea").text("")
+        $(".modal-title").text("Write some message")
+        $("#replyModal").modal("show")
     })
 })
