@@ -1,9 +1,9 @@
 {% extends "template.html" %}
 
 {% block head %}
+{% include "msg/head.html" %}
 <script src="{{ url_for('static',filename='msg/msg_ajax.js') }}"></script>
 <title>Photo Board</title>
-
 {% endblock %}
 
 {% block body %}

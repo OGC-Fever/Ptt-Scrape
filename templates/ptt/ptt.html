@@ -1,6 +1,7 @@
 {% extends "template.html" %}
 
 {% block head %}
+{% include "ptt/head.html" %}
 <title>PTT Scraper</title>
 <script src="{{ url_for('static',filename='ptt/ptt_ajax_load.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/ptt_ajax_post.js') }}"></script>

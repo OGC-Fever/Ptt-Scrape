@@ -1,13 +1,10 @@
 $(document).ready(function () {
     var page = 1;
-    var ajax_error = false;
 
     $(window).scroll(function () {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             page += 1;
-            if (ajax_error == false) {
-                ajax_load(page);
-            }
+            ajax_load(page);
         }
     });
 
@@ -37,15 +34,6 @@ $(document).ready(function () {
         }
     }
 
-    function stop_load() {
-        ajax_error = true;
-        var html = `
-        <div class='mb-3 text-center text-light'>
-            No more message.
-        </div>`;
-        document.body.insertAdjacentHTML('beforeend', html);
-    }
-
     function ajax_load(page) {
         $.ajax({
             url: "/msg/more",
@@ -55,9 +43,6 @@ $(document).ready(function () {
             success: function (data) {
                 append_data(data)
             },
-            error: function () {
-                stop_load()
-            }
         })
     }
 });

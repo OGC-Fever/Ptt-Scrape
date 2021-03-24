@@ -42,13 +42,12 @@ def msg(page=1):
         return redirect(url_for("msg"))
 
 
-@msg_app.route("/more", methods=["GET", "POST"])
+@msg_app.route("/more", methods=["POST"])
 def msg_more():
-    if request.method == "POST":  # ajax
-        page = int(request.form["page"])
-        data = get_data(page_limit, page)
+    page = int(request.form["page"])
+    data = get_data(page_limit, page)
     if not data:
-        return data
+        return ""
     record = {"id": [], "name": [], "msg": []}
     for rec in data:
         record['id'].append(rec.id)
