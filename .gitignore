@@ -1,7 +1,6 @@
-*.db
+.db
 
-*__pycache__*
+__pycache__
 
-*test*
-
-*vscode*
+test
+.vscode
