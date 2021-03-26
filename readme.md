@@ -9,7 +9,7 @@ Personal side projects just for fun & practice
 - packages : flask, sqlite3, sqlalchemy, pillow
 - ajax : scroll down to get more photo
 - storing all data in sqlite database w/ sqlalchemy
-- resizing photo in PIL
+- resizing photo in pillow
 
 ## PTT Scraper
 - demo http://orzogc.ddns.net/ptt
