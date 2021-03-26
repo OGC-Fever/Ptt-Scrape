@@ -1,6 +1,6 @@
 from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
-from werkzeug.exceptions import NotFound
+# from werkzeug.exceptions import NotFound
 
 from config import msg_app, ptt_app
 
