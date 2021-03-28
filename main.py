@@ -12,13 +12,6 @@ from apps.msg.msg import *
 from apps.ptt.ptt_get import *
 from apps.ptt.ptt_post import *
 
-try:
-    import googleclouddebugger
-    googleclouddebugger.enable(
-        breakpoint_enable_canary=True
-    )
-except ImportError:
-    pass
 
 msg_db.init_app(msg_app)
 msg_db.create_all()
