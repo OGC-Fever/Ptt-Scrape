@@ -2,19 +2,19 @@ function search_result(json, page_n) {
     if (!page_n) {
         var page_n = 1;
     }
-    for (let index = 0; index < json.length - 1; index++) {
+    for (let index = 0; index < json["data"].length; index++) {
         if ((Math.ceil(parseInt(index + 1) / 10)) == page_n) {
             $('#ajax_board').append(`
                 <tr>
-                    <td>${index + 1}</td>
-                    <td class="push">${json[index]["push"]}</td>
+                    <td class="text-end">${index + 1}</td>
+                    <td class="push text-end">${json["data"][index]["push"]}</td>
                     <td>
-                        <a class="text-decoration-none link-light" href="${json[index]["url"]}" target="_blank" rel="noreferrer">
-                            ${json[index]["title"]}
+                        <a class="text-decoration-none link-light" href="${json["data"][index]["url"]}" target="_blank" rel="noreferrer">
+                            ${json["data"][index]["title"]}
                         </a>
                     </td>
-                    <td class="author_name">${json[index]["author"]}</td>
-                    <td>${json[index]["date"]}</td>
+                    <td class="author_name">${json["data"][index]["author"]}</td>
+                    <td>${json["data"][index]["date"]}</td>
                 </tr>`
             );
         }
@@ -23,7 +23,7 @@ function search_result(json, page_n) {
         let author = $(this).text();
         $('#author').val(author);
     })
-    $('td:contains("99+")').filter(".push").addClass("text-danger fw-bolder");
+    $('td:contains("+99")').filter(".push").addClass("text-danger fw-bolder");
     $('td:contains("X")').filter(".push").addClass("text-secondary");
     let push = $("td").filter(".push")
     for (let index = 0; index < push.length; index++) {

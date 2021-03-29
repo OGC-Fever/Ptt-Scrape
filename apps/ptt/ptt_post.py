@@ -59,16 +59,22 @@ def ptt_search():
     else:  # len(data) < count
         page = math.ceil(count/20)
         data = search_more(page, url, board, query_prms, cookies, data)
-    json = []
+    json = {"data": []}
     for item in data:
         if len(json) >= count:
             break
         if item[3] == "爆":
-            item[3] = "99+"
-        json.append({"title": item[0],
-                     "url": f"{url}/{item[1]}",
-                     "push": item[3],
-                     "author": item[4],
-                     "date": item[2].strip()})
-    json.append(len(json))
+            item[3] = "+99"
+        json["data"].append({"title": item[0],
+                             "url": f"{url}/{item[1]}",
+                             "push": item[3],
+                             "author": item[4],
+                             "date": item[2].strip()})
+        # json.append({"title": item[0],
+        #              "url": f"{url}/{item[1]}",
+        #              "push": item[3],
+        #              "author": item[4],
+        #              "date": item[2].strip()})
+    json["count"] = len(json["data"])
+    json[""] = None
     return jsonify(json)

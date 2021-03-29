@@ -11,12 +11,16 @@ def hot_list():
     html = bs(res.content, 'lxml')
     data = get_list(html)[0]
     count = get_list(html)[1]
-    json = []
+    json = {"data": []}
+    users = 0
     for item in data:
-        json.append({"name": item[0],
-                     "title": item[1],
-                     "url": f"{url.replace('index.html',item[2])}"})
-    json.append(count)
+        json["data"].append({"name": item[0],
+                             "title": item[1],
+                             "url": f"{url.replace('index.html', item[2])}",
+                             "users": item[3]})
+        users += int(item[3])
+    json["count"] = count
+    json["users"] = users
     return jsonify(json)
 
 
@@ -25,10 +29,12 @@ def get_list(html):
     name = html.find_all("div", {"class": "board-name"})
     title = html.find_all("div", {"class": "board-title"})
     url = html.find_all("a", {"class": "board"})
+    users = html.find_all("div", {"class": "board-nuser"})
     while len(data) < len(name):
         data.append([name[len(data)].text,
                      title[len(data)].text,
-                     url[len(data)].attrs["href"].split("/")[2]])
+                     url[len(data)].attrs["href"].split("/")[2],
+                     users[len(data)].text])
     return [data, len(data)]
 
 

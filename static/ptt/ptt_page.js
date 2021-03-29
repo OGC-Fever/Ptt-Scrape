@@ -1,5 +1,5 @@
 function ajax_pagination(json, page_n) {
-    var page_count = Math.ceil(json.slice(-1) / 10);
+    var page_count = Math.ceil(json["count"] / 10);
     if (page_count == 1) {
         return;
     }
