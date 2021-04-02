@@ -3,13 +3,6 @@
 {% block head %}
 {% include "ptt/head.html" %}
 <title>PTT Scraper</title>
-<script src="{{ url_for('static',filename='ptt/ptt_ajax_load.js') }}"></script>
-<script src="{{ url_for('static',filename='ptt/ptt_ajax_post.js') }}"></script>
-<script src="{{ url_for('static',filename='ptt/ptt_ajax_search.js') }}"></script>
-<script src="{{ url_for('static',filename='ptt/ptt_hot.js') }}"></script>
-<script src="{{ url_for('static',filename='ptt/ptt_page.js') }}"></script>
-<script src="{{ url_for('static',filename='ptt/ptt_ajax.js') }}"></script>
-
 {% endblock %}
 
 {% block body %}
@@ -33,7 +26,8 @@
                 <label for="push">Push</label>
             </div>
             <div class="form-floating my-1">
-                <input class="form-control" value=10 type="number" min=10 max=1000 step=10 id="count" v-model="prms.count">
+                <input class="form-control" value=10 type="number" min=10 max=1000 step=10 id="count"
+                    v-model="prms.count">
                 <label for="count">Count</label>
             </div>
             <div class="btn-toolbar mx-auto" id="btn_click">
@@ -46,36 +40,27 @@
     <div class="col-9 my-1 mx-auto">
         <div class="card bg-dark text-light">
             <table class="table table-dark table-hover table-striped my-0 py-1">
-                <thead id="get_header">
-                    <tr v-if="show">
-                        <th class="col-1 text-end">#</th>
-                        <th class="col-2">Board</th>
-                        <th class="col">Title</th>
-                        <th class="col text-end">Users</th>
-                        <th class="col text-end">Users %</th>
-                    </tr>
+                <thead id="header">
                 </thead>
-                <thead id="post_header">
-                    <tr v-if="show">
-                        <th class="col-1 text-end">#</th>
-                        <th class="col-1 text-end">Hot</th>
-                        <th class="col">Title</th>
-                        <th class="col-1">Author</th>
-                        <th class="col-1">Date</th>
-                    </tr>
-                </thead>
-                <tbody id="ajax_board">
+                <tbody id="view_board">
                 </tbody>
             </table>
         </div>
         <div class="mt-1">
-            <ul id="ajax_pagination" class="pagination offset-1 my-1">
+            <ul id="pagination" class="pagination offset-1 my-1">
             </ul>
         </div>
     </div>
 </div>
+{% block script %}
 <script src="https://cdn.jsdelivr.net/npm/vue@3.0.7/dist/vue.global.prod.js"></script>
+<script src="{{ url_for('static',filename='ptt/vue_app.js') }}"></script>
 
-<script src="{{ url_for('static',filename='ptt/vue.js') }}"></script>
-
+<script src="{{ url_for('static',filename='ptt/ptt_ajax_load.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_ajax_post.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_ajax_search.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_hot.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_page.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/ptt_init.js') }}"></script>
+{% endblock %}
 {% endblock %}

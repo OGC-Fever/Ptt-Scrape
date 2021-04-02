@@ -14,8 +14,8 @@ function ajax_post(page_n) {
     function action(mem_store, page_n) {
         $("#get_header").hide();
         $("#post_header").show();
-        $('#ajax_board').html("");
-        $('#ajax_pagination').html("");
+        $('#view_board').html("");
+        $('#pagination').html("");
         search_result(mem_store, page_n);
         ajax_pagination(mem_store, page_n);
     }

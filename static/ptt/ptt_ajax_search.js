@@ -4,7 +4,7 @@ function search_result(json, page_n) {
     }
     for (let index = 0; index < json["data"].length; index++) {
         if ((Math.ceil(parseInt(index + 1) / 10)) == page_n) {
-            $('#ajax_board').append(`
+            $('#view_board').append(`
                 <tr>
                     <td class="text-end">${index + 1}</td>
                     <td class="push text-end">${json["data"][index]["push"]}</td>

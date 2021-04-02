@@ -8,14 +8,14 @@ function ajax_pagination(json, page_n) {
     }
     for (let page = 1; page <= page_count; page++) {
         if (page == 1) {
-            $('#ajax_pagination').prepend(`
+            $('#pagination').prepend(`
                 <li class="page-item">
                     <a class="page-link" href="#" id="page_nav_start">|<</a>
                 </li>`
             );
         }
         if (Math.abs(page - page_n) < 4 && page - page_n >= -1) {
-            $('#ajax_pagination').append(`
+            $('#pagination').append(`
                 <li class="page-item">
                     <a class="page-link" href="#" id="page_nav_${page}">${page}</a>
                 </li>`
@@ -25,7 +25,7 @@ function ajax_pagination(json, page_n) {
             }
         }
         if (page == page_count) {
-            $('#ajax_pagination').append(`
+            $('#pagination').append(`
                 <li class="page-item">
                     <a class="page-link" href="#" id="page_nav_end">>|</a>
                 </li>`

@@ -1,11 +1,13 @@
+
 function hot_board(json, page_n) {
+
     if (!page_n) {
         var page_n = 1;
     }
     flag = 0;
     for (let index = 0; index < json["data"].length; index++) {
         if ((Math.ceil(parseInt(index + 1) / 10)) == page_n) {
-            $('#ajax_board').append(`
+            $('#view_board').append(`
             <tr>
                 <td class="text-end">${index + 1}</td>
                 <td class="board_name">${json["data"][index]["name"]}</td>

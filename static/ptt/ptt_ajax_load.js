@@ -16,8 +16,11 @@ function ajax_load(page_n) {
 }
 
 function load_action(mem_store, page_n) {
-    $('#ajax_board').html("");
-    $('#ajax_pagination').html("");
+    // $('#top_board').html("");
+    view_board.mount('#view_board')
+    // $('#pagination').html("");
+    pagination.mount('#pagination')
     hot_board(mem_store, page_n);
     ajax_pagination(mem_store, page_n);
 }
+
