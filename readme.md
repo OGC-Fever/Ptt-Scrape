@@ -15,4 +15,4 @@ Personal side projects just for fun & practice
 - demo http://orzogc.ddns.net/ptt
 - scraping article titles from ptt.cc and show on web
 - packages : BeautifulSoup
-- ajax : action in one page by jQuery
+- ajax : action in one page by jQuery with partial Vue.js
