@@ -6,25 +6,25 @@ function ajax_pagination(json, page_n) {
     if (!page_n) {
         var page_n = 1;
     }
-    for (let item = 1; item <= page_count; item++) {
-        if (item == 1) {
+    for (let page = 1; page <= page_count; page++) {
+        if (page == 1) {
             $('#ajax_pagination').prepend(`
                 <li class="page-item">
                     <a class="page-link" href="#" id="page_nav_start">|<</a>
                 </li>`
             );
         }
-        if (Math.abs(item - page_n) <= 3) {
+        if (Math.abs(page - page_n) < 4 && page - page_n >= -1) {
             $('#ajax_pagination').append(`
                 <li class="page-item">
-                    <a class="page-link" href="#" id="page_nav_${item}">${item}</a>
+                    <a class="page-link" href="#" id="page_nav_${page}">${page}</a>
                 </li>`
             );
-            if (item == page_n) {
-                $(`#page_nav_${item}`).parent().addClass("active");
+            if (page == page_n) {
+                $(`#page_nav_${page}`).parent().addClass("active");
             }
         }
-        if (item == page_count) {
+        if (page == page_count) {
             $('#ajax_pagination').append(`
                 <li class="page-item">
                     <a class="page-link" href="#" id="page_nav_end">>|</a>

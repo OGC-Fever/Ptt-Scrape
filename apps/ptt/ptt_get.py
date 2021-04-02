@@ -2,6 +2,23 @@ from bs4 import BeautifulSoup as bs
 import requests
 from config import ptt_app
 from flask import render_template, jsonify
+import re
+import paramiko
+import time
+
+
+def users():
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect("ptt.cc", username="bbsu", password="")
+    shell = ssh.invoke_shell()
+    time.sleep(0.1)
+    if shell.recv_ready():
+        msg = shell.recv(9999)
+        msg = msg.decode("utf8", "ignore")
+        pattern = r"[0-9]{4,6}"
+        data = re.search(pattern, msg)[0]
+        return data
 
 
 @ptt_app.route("/list", methods=["GET"])
@@ -12,15 +29,13 @@ def hot_list():
     data = get_list(html)[0]
     count = get_list(html)[1]
     json = {"data": []}
-    users = 0
     for item in data:
         json["data"].append({"name": item[0],
                              "title": item[1],
                              "url": f"{url.replace('index.html', item[2])}",
                              "users": item[3]})
-        users += int(item[3])
     json["count"] = count
-    json["users"] = users
+    json["users"] = users()
     return jsonify(json)
 
 
