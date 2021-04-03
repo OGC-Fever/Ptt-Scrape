@@ -16,10 +16,10 @@ function ajax_load(page_n) {
 }
 
 function load_action(mem_store, page_n) {
-    // $('#top_board').html("");
-    view_board.mount('#view_board')
-    // $('#pagination').html("");
-    pagination.mount('#pagination')
+    $('#view_board').html("");
+    // view_board.mount('#view_board')
+    $('#pagination').html("");
+    // pagination.mount('#pagination')
     hot_board(mem_store, page_n);
     ajax_pagination(mem_store, page_n);
 }

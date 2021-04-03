@@ -15,56 +15,41 @@ const ptt_form = Vue.createApp({
             for (let key in this.prms) {
                 this.prms[key] = ""
             }
-        }
+        },
+        search() { header_get.flag = 1 }
     }
-})
+}).mount('#ptt_form')
 
-const get_header = Vue.createApp({
-    data() {
-        return {
-            show: true
-        }
-    },
+const header_get = Vue.createApp({
+    data() { return { flag: 0 } },
+    watch: { flag: () => { header_post.mount("#header") } },
     template: `
-        <tr v-if="show">
+        <tr>
             <th class="col-1 text-end">#</th>
             <th class="col-2">Board</th>
             <th class="col">Title</th>
             <th class="col text-end">Users</th>
             <th class="col text-end">Users %</th>
-        </tr>`
-})
+        </tr>`,
+}).mount("#header")
 
-const post_header = Vue.createApp({
-    data() {
-        return {
-            show: true
-        }
-    },
+const header_post = Vue.createApp({
     template: `
-        <tr v-if="show">
+        <tr>
             <th class="col-1 text-end">#</th>
             <th class="col-1 text-end">Hot</th>
             <th class="col">Title</th>
             <th class="col-1">Author</th>
             <th class="col-1">Date</th>
-        </tr>`
+        </tr>`,
 })
 
 const view_board = Vue.createApp({
-    mounted() {
-        this.show = true
-    },
-    unmounted() {
-        this.show = false
-    },
-})
+    mounted() { this.show = false },
+    unmounted() { this.show = false },
+}).mount('#view_board')
 
 const pagination = Vue.createApp({
-    mounted() {
-        this.show = true
-    },
-    unmounted() {
-        this.show = false
-    },
-})
+    mounted() { this.show = true },
+    unmounted() { this.show = false },
+}).mount('#pagination')
