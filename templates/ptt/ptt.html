@@ -8,7 +8,7 @@
 {% block body %}
 <div class="row col-10 my-2 mx-auto g-2">
     <div class="col-3">
-        <form class="mx-1" id="ptt_form" onsubmit="ajax_post();return false;">
+        <form class="mx-1" id="ptt_form" onsubmit="ptt_form.search();return false;">
             <div class="form-floating my-1">
                 <input class="form-control" type="text" id="board" v-model="prms.board">
                 <label for="board">Board</label>
@@ -60,7 +60,7 @@
                 <tbody id="view_board">
                     <tr v-if="get" v-for="data in table">
                         <td class="text-end">@data.no@</td>
-                        <td class="board_name">@data.name@</td>
+                        <td class="board_name" @click="pass_name(data)">@data.name@</td>
                         <td>
                             <a class="text-decoration-none link-light" v-bind:href="data.link" target="_blank"
                                 rel="noreferrer">
@@ -108,7 +108,6 @@
 <script src="{{ url_for('static',filename='ptt/view.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/page_nav.js') }}"></script>
 
-<script src="{{ url_for('static',filename='ptt/ptt_ajax_post.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/ptt_ajax_search.js') }}"></script>
 {% endblock %}
 {% endblock %}

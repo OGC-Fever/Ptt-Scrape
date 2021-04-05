@@ -6,7 +6,9 @@ const view_board = Vue.createApp({
             page_n: 1,
             init: 0,
             table: [],
-            get: true
+            flag: 0,
+            get: true,
+            post: false
         }
     },
     mounted() {
@@ -16,6 +18,10 @@ const view_board = Vue.createApp({
         }
     },
     watch: {
+        flag() {
+            this.get = false
+            this.post = true
+        },
         mem_store() {
             this.hot_board(this.mem_store, this.page_n)
         },
@@ -24,6 +30,12 @@ const view_board = Vue.createApp({
         }
     },
     methods: {
+        pass_name(data) {
+            ptt_form.prms["board"] = data.name
+        },
+        pass_keyword(data) {
+            ptt_form.prms["keyword"] = data.keyword
+        },
         init_load(page_n = 1) {
             if (this.init == 0) {
                 $.ajax({
@@ -71,8 +83,3 @@ const view_board = Vue.createApp({
         }
     }
 }).mount('#view_board')
-
-$('.board_name').click(function () {
-    var board = $(this).text();
-    $('#board').val(board);
-})

@@ -8,8 +8,13 @@ const header = Vue.createApp({
     },
     watch: {
         flag() {
-            this.get = false
-            this.post = true
+            if (this.flag == 1) {
+                this.get = false
+                this.post = true
+            } else {
+                this.get = true
+                this.post = false
+            }
         }
     },
 }).mount("#header")

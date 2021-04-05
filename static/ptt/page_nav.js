@@ -63,17 +63,17 @@ const pagination = Vue.createApp({
     }
 }).mount('#pagination')
 
-$("[id^=page_]").on("click", function () {
-    if ($(this).attr("id").includes("start")) {
-        item = 1;
-    } else if ($(this).attr("id").includes("end")) {
-        item = page_count
-    } else {
-        item = $(this).attr("id").split("_").slice(-1)
-    }
-    if (ptt.flag == 0) {
-        ptt.init_load(item);
-    } else {
-        ptt.ajax_post(item);
-    }
-})
+// $("[id^=page_]").on("click", function () {
+//     if ($(this).attr("id").includes("start")) {
+//         item = 1;
+//     } else if ($(this).attr("id").includes("end")) {
+//         item = page_count
+//     } else {
+//         item = $(this).attr("id").split("_").slice(-1)
+//     }
+//     if (ptt.flag == 0) {
+//         ptt.init_load(item);
+//     } else {
+//         ptt.ajax_post(item);
+//     }
+// })
