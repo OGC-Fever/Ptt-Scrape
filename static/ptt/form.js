@@ -16,7 +16,11 @@ const ptt_form = Vue.createApp({
                 this.prms[key] = ""
             }
         },
-        search() { header_post.flag = 1 }
+        search() {
+            header_get.flag = 1
+            view_board.flag = 1
+            pagination.flag = 1
+        }
     }
 }).mount('#ptt_form')
 

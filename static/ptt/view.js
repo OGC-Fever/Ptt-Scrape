@@ -1,39 +1,78 @@
 const view_board = Vue.createApp({
+    delimiters: ['@', '@'],
+    data() {
+        return {
+            mem_store: [],
+            page_n: 1,
+            init: 0,
+            table: [],
+            get: true
+        }
+    },
     mounted() {
-        ptt.ajax_load(1)
-        ptt.init = 1
+        if (this.init == 0) {
+            this.init_load(1)
+            this.init = 1
+        }
+    },
+    watch: {
+        mem_store() {
+            this.hot_board(this.mem_store, this.page_n)
+        },
+        page_n() {
+            this.hot_board(this.mem_store, this.page_n)
+        }
     },
     methods: {
+        init_load(page_n = 1) {
+            if (this.init == 0) {
+                $.ajax({
+                    url: "/ptt/list",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (json) {
+                        this.mem_store = json
+                        view_board.load_action(json, page_n)
+                    }
+                })
+            } else {
+                this.load_action(this.mem_store, page_n)
+
+            }
+        },
+        load_action(json, page_n = 1) {
+            this.mem_store = json
+            this.page_n = page_n
+            pagination.counts = json["count"]
+            pagination.page_n = page_n
+
+        },
         hot_board(json, page_n) {
             if (!page_n) {
-                var page_n = 1;
+                page_n = 1;
             }
-            flag = 0;
+            this.table = []
             for (let index = 0; index < json["data"].length; index++) {
                 if ((Math.ceil(parseInt(index + 1) / 10)) == page_n) {
-                    $('#view_board').append(`
-                    <tr>
-                        <td class="text-end">${index + 1}</td>
-                        <td class="board_name">${json["data"][index]["name"]}</td>
-                        <td>
-                            <a class="text-decoration-none link-light" href="${json["data"][index]["url"]}" target="_blank" rel="noreferrer">
-                                ${json["data"][index]["title"]}
-                            </a>
-                        </td>
-                        <td class="board_users text-end">
-                            ${Intl.NumberFormat().format(json["data"][index]["users"])}
-                        </td>
-                        <td class="board_users text-end">
-                            ${Math.round(json["data"][index]["users"] / json["users"] * 10000) / 100} %
-                        </td>
-                    </tr>`
-                    );
+
+                    this.table.push(
+                        {
+                            no: index + 1,
+                            name: json["data"][index]["name"],
+                            link: json["data"][index]["url"],
+                            title: json["data"][index]["title"],
+                            users: Intl.NumberFormat().format(json["data"][index]["users"]),
+                            percentage:
+                                Math.round(json["data"][index]["users"] / json["users"] * 10000) / 100
+                        }
+                    )
                 }
             }
-            $('.board_name').click(function () {
-                var board = $(this).text();
-                $('#board').val(board);
-            })
         }
     }
 }).mount('#view_board')
+
+$('.board_name').click(function () {
+    var board = $(this).text();
+    $('#board').val(board);
+})

@@ -42,13 +42,59 @@
         <div class="card bg-dark text-light">
             <table class="table table-dark table-hover table-striped my-0 py-1">
                 <thead id="header">
+                    <tr v-if="get">
+                        <th class="col-1 text-end">#</th>
+                        <th class="col-2">Board</th>
+                        <th class="col">Title</th>
+                        <th class="col text-end">Users</th>
+                        <th class="col text-end">Users %</th>
+                    </tr>
+                    <tr v-if="post">
+                        <th class="col-1 text-end">#</th>
+                        <th class="col-1 text-end">Hot</th>
+                        <th class="col">Title</th>
+                        <th class="col-1">Author</th>
+                        <th class="col-1">Date</th>
+                    </tr>
                 </thead>
                 <tbody id="view_board">
+                    <tr v-if="get" v-for="data in table">
+                        <td class="text-end">@data.no@</td>
+                        <td class="board_name">@data.name@</td>
+                        <td>
+                            <a class="text-decoration-none link-light" v-bind:href="data.link" target="_blank"
+                                rel="noreferrer">
+                                @data.title@
+                            </a>
+                        </td>
+                        <td class="board_users text-end">
+                            @data.users@
+                        </td>
+                        <td class="board_users text-end">
+                            @data.percentage@ %
+                        </td>
+                    </tr>
+                    <tr v-if="post" v-for="n in 9">
+                        <td class="text-end">${index + 1}</td>
+                        <td class="push text-end">${json["data"][index]["push"]}</td>
+                        <td>
+                            <a class="text-decoration-none link-light" href="${json[" data"][index]["url"]}"
+                                target="_blank" rel="noreferrer">
+                                ${json["data"][index]["title"]}
+                            </a>
+                        </td>
+                        <td class="author_name">${json["data"][index]["author"]}</td>
+                        <td>${json["data"][index]["date"]}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
         <div class="mt-1">
             <ul id="pagination" class="pagination offset-1 my-1">
+                <li class="page-item" v-bind:class="{active:value.active}" v-for="value in values">
+                    <a class="page-link" @click="get_post(value.id)" href="#"
+                        v-bind:id="`page_${value.id}`">@value.text@</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -56,11 +102,11 @@
 <div id="dummy"></div>
 {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/vue@3.0.7/dist/vue.global.prod.js"></script>
-<script src="{{ url_for('static',filename='ptt/main.js') }}"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@next/dist/vue.global.prod.js"></script> -->
+<script src="{{ url_for('static',filename='ptt/form.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/table_header.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/view.js') }}"></script>
-<script src="{{ url_for('static',filename='ptt/form.js') }}"></script>
-<script src="{{ url_for('static',filename='ptt/page.js') }}"></script>
+<script src="{{ url_for('static',filename='ptt/page_nav.js') }}"></script>
 
 <script src="{{ url_for('static',filename='ptt/ptt_ajax_post.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/ptt_ajax_search.js') }}"></script>
