@@ -9,7 +9,7 @@ const ptt_form = Vue.createApp({
                 count: 10
             },
             init_post: 0,
-            cond: true
+            cond: true,
         }
     },
     watch: {
@@ -23,12 +23,7 @@ const ptt_form = Vue.createApp({
                 this.prms[key] = ""
             }
         },
-        search(page_n) {
-
-            // if (!search_prms) {
-            //     search_prms = prms;
-            // }
-            // cond = JSON.stringify(search_prms) == JSON.stringify(prms)
+        search(page_n = 1) {
             if (this.init_post == 0 || !cond) {
                 $.ajax({
                     url: "/ptt/search",
@@ -36,26 +31,21 @@ const ptt_form = Vue.createApp({
                     dataType: "json",
                     data: this.prms,
                     success: function (json) {
-                        // search_prms = prms;
-                        view_board.mem_store = json
-                        ptt_form.load_mem(json, page_n)
                         this.init_post = 1
-                        view_board.flag = 1
-                        pagination.flag = 1
-                        header.flag = 1
+                        ptt_form.load_mem(json, page_n)
                     },
                 })
             } else {
-                load_mem(view_board.mem_store, page_n);
+                ptt_form.load_mem(view_board.mem_store, page_n);
             }
         },
         load_mem(json, page_n) {
+            view_board.mem_store = json
+            view_board.page_n = page_n
+            pagination.counts = json["count"]
+            pagination.page_n = page_n
             header.flag = 1
-            // $('#view_board').html("");
-            // $('#pagination').html("");
-            search_result(json, page_n);
-            pagination.page_nav(json, page_n);
+            view_board.flag = 1
         },
     }
 }).mount('#ptt_form')
-

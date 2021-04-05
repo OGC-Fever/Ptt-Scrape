@@ -31,8 +31,7 @@
                 <label for="count">Count</label>
             </div>
             <div class="btn-toolbar mx-auto" id="btn_click">
-                <input class="justify-content-center col me-1 btn-group btn btn-primary" type="submit" value="Search"
-                    @click="search">
+                <input class="justify-content-center col me-1 btn-group btn btn-primary" type="submit" value="Search">
                 <input class="justify-content-center col btn-group btn btn-secondary" type="button" value="Reset"
                     @click="clear">
             </div>
@@ -58,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody id="view_board">
-                    <tr v-if="get" v-for="data in table">
+                    <tr v-if="flag==0" v-for="data in table">
                         <td class="text-end">@data.no@</td>
                         <td class="board_name" @click="pass_name(data)">@data.name@</td>
                         <td>
@@ -74,17 +73,17 @@
                             @data.percentage@ %
                         </td>
                     </tr>
-                    <tr v-if="post" v-for="n in 9">
-                        <td class="text-end">${index + 1}</td>
-                        <td class="push text-end">${json["data"][index]["push"]}</td>
+                    <tr v-if="flag==1" v-for="data in table">
+                        <td class="text-end">@data.no@</td>
+                        <td class="push text-end">@data.push@</td>
                         <td>
-                            <a class="text-decoration-none link-light" href="${json[" data"][index]["url"]}"
-                                target="_blank" rel="noreferrer">
-                                ${json["data"][index]["title"]}
+                            <a class="text-decoration-none link-light" target="_blank" v-bind:href="data.link"
+                                rel="noreferrer">
+                                @data.title@
                             </a>
                         </td>
-                        <td class="author_name">${json["data"][index]["author"]}</td>
-                        <td>${json["data"][index]["date"]}</td>
+                        <td class="author_name">@data.author@</td>
+                        <td>@data.date@</td>
                     </tr>
                 </tbody>
             </table>
@@ -102,12 +101,10 @@
 <div id="dummy"></div>
 {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/vue@3.0.7/dist/vue.global.prod.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/vue@next/dist/vue.global.prod.js"></script> -->
 <script src="{{ url_for('static',filename='ptt/form.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/table_header.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/view.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/page_nav.js') }}"></script>
 
-<script src="{{ url_for('static',filename='ptt/ptt_ajax_search.js') }}"></script>
 {% endblock %}
 {% endblock %}

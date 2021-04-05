@@ -3,20 +3,23 @@ const pagination = Vue.createApp({
     data() {
         return {
             values: [],
-            flag: 0,
             page_n: 1,
-            counts: 0
+            counts: 0,
         }
     },
     mounted() {
         this.page_nav(this.counts, this.page_n)
     },
     watch: {
-        counts() {
-            this.page_nav(this.counts, this.page_n)
+        counts(value, old_value) {
+            if (value != old_value) {
+                this.page_nav(this.counts, this.page_n)
+            }
         },
-        page_n() {
-            this.page_nav(this.counts, this.page_n);
+        page_n(value, old_value) {
+            if (value != old_value) {
+                this.page_nav(this.counts, this.page_n)
+            }
         }
     },
     methods: {
@@ -31,11 +34,11 @@ const pagination = Vue.createApp({
             return this
         },
         page_nav(counts, page_n = 1) {
-            let page_count = Math.ceil(counts / 10);
+            this.values = []
+            let page_count = Math.ceil(counts / 10)
             if (page_count == 1) {
                 return;
             }
-            this.values = []
             for (let page = 1; page <= page_count; page++) {
                 if (page == 1) {
                     this.values.push(
@@ -62,18 +65,3 @@ const pagination = Vue.createApp({
         }
     }
 }).mount('#pagination')
-
-// $("[id^=page_]").on("click", function () {
-//     if ($(this).attr("id").includes("start")) {
-//         item = 1;
-//     } else if ($(this).attr("id").includes("end")) {
-//         item = page_count
-//     } else {
-//         item = $(this).attr("id").split("_").slice(-1)
-//     }
-//     if (ptt.flag == 0) {
-//         ptt.init_load(item);
-//     } else {
-//         ptt.ajax_post(item);
-//     }
-// })

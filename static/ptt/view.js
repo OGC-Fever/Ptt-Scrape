@@ -6,9 +6,7 @@ const view_board = Vue.createApp({
             page_n: 1,
             init: 0,
             table: [],
-            flag: 0,
-            get: true,
-            post: false
+            flag: 0
         }
     },
     mounted() {
@@ -18,15 +16,19 @@ const view_board = Vue.createApp({
         }
     },
     watch: {
-        flag() {
-            this.get = false
-            this.post = true
-        },
         mem_store() {
-            this.hot_board(this.mem_store, this.page_n)
+            if (this.flag == 0) {
+                this.hot_board(this.mem_store, this.page_n)
+            } else {
+                this.search_result(this.mem_store, this.page_n)
+            }
         },
         page_n() {
-            this.hot_board(this.mem_store, this.page_n)
+            if (this.flag == 0) {
+                this.hot_board(this.mem_store, this.page_n)
+            } else {
+                this.search_result(this.mem_store, this.page_n)
+            }
         }
     },
     methods: {
@@ -43,13 +45,12 @@ const view_board = Vue.createApp({
                     type: "GET",
                     dataType: "json",
                     success: function (json) {
-                        this.mem_store = json
                         view_board.load_action(json, page_n)
+                        this.init = 1
                     }
                 })
             } else {
                 this.load_action(this.mem_store, page_n)
-
             }
         },
         load_action(json, page_n = 1) {
@@ -57,7 +58,6 @@ const view_board = Vue.createApp({
             this.page_n = page_n
             pagination.counts = json["count"]
             pagination.page_n = page_n
-
         },
         hot_board(json, page_n) {
             if (!page_n) {
@@ -66,7 +66,6 @@ const view_board = Vue.createApp({
             this.table = []
             for (let index = 0; index < json["data"].length; index++) {
                 if ((Math.ceil(parseInt(index + 1) / 10)) == page_n) {
-
                     this.table.push(
                         {
                             no: index + 1,
@@ -80,6 +79,38 @@ const view_board = Vue.createApp({
                     )
                 }
             }
+        },
+        search_result(json, page_n) {
+            if (!page_n) {
+                var page_n = 1;
+            }
+            this.table = []
+            for (let index = 0; index < json["data"].length; index++) {
+                if ((Math.ceil(parseInt(index + 1) / 10)) == page_n) {
+                    this.table.push(
+                        {
+                            no: index + 1,
+                            push: json["data"][index]["push"],
+                            link: json["data"][index]["url"],
+                            title: json["data"][index]["title"],
+                            author: json["data"][index]["author"],
+                            date: json["data"][index]["date"]
+                        }
+                    )
+                }
+            }
         }
     }
 }).mount('#view_board')
+      // $('.author_name').click(function () {
+            //     let author = $(this).text();
+            //     $('#author').val(author);
+            // })
+            // $('td:contains("+99")').filter(".push").addClass("text-danger fw-bolder");
+            // $('td:contains("X")').filter(".push").addClass("text-secondary");
+            // let push = $("td").filter(".push")
+            // for (let index = 0; index < push.length; index++) {
+            //     if (parseInt($(push[index]).text()) > 10) {
+            //         $(push[index]).addClass("text-warning fw-bold");
+            //     };
+            // }
