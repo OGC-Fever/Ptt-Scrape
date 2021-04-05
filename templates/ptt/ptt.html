@@ -75,14 +75,17 @@
                     </tr>
                     <tr v-if="flag==1" v-for="data in table">
                         <td class="text-end">@data.no@</td>
-                        <td class="push text-end">@data.push@</td>
+                        <td class="push text-end"
+                            v-bind:class="{'text-danger':data.td,'text-secondary':data.ts, 'text-warning':data.tw, 'fw-bold':data.fb}">
+                            @data.push@
+                        </td>
                         <td>
                             <a class="text-decoration-none link-light" target="_blank" v-bind:href="data.link"
                                 rel="noreferrer">
                                 @data.title@
                             </a>
                         </td>
-                        <td class="author_name">@data.author@</td>
+                        <td class="author_name" @click="pass_author(data)">@data.author@</td>
                         <td>@data.date@</td>
                     </tr>
                 </tbody>

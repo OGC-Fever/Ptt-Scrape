@@ -35,8 +35,8 @@ const view_board = Vue.createApp({
         pass_name(data) {
             ptt_form.prms["board"] = data.name
         },
-        pass_keyword(data) {
-            ptt_form.prms["keyword"] = data.keyword
+        pass_author(data) {
+            ptt_form.prms["author"] = data.author
         },
         init_load(page_n = 1) {
             if (this.init == 0) {
@@ -87,6 +87,14 @@ const view_board = Vue.createApp({
             this.table = []
             for (let index = 0; index < json["data"].length; index++) {
                 if ((Math.ceil(parseInt(index + 1) / 10)) == page_n) {
+                    let td = ts = tw = fb = false
+                    if (String(json["data"][index]["push"]).includes("+")) {
+                        td = fb = true
+                    } else if (String(json["data"][index]["push"]).includes("X")) {
+                        ts = true
+                    } else if (json["data"][index]["push"] > 10) {
+                        tw = fb = true
+                    }
                     this.table.push(
                         {
                             no: index + 1,
@@ -94,7 +102,8 @@ const view_board = Vue.createApp({
                             link: json["data"][index]["url"],
                             title: json["data"][index]["title"],
                             author: json["data"][index]["author"],
-                            date: json["data"][index]["date"]
+                            date: json["data"][index]["date"],
+                            td: td, ts: ts, tw: tw, fb: fb
                         }
                     )
                 }
@@ -102,15 +111,3 @@ const view_board = Vue.createApp({
         }
     }
 }).mount('#view_board')
-      // $('.author_name').click(function () {
-            //     let author = $(this).text();
-            //     $('#author').val(author);
-            // })
-            // $('td:contains("+99")').filter(".push").addClass("text-danger fw-bolder");
-            // $('td:contains("X")').filter(".push").addClass("text-secondary");
-            // let push = $("td").filter(".push")
-            // for (let index = 0; index < push.length; index++) {
-            //     if (parseInt($(push[index]).text()) > 10) {
-            //         $(push[index]).addClass("text-warning fw-bold");
-            //     };
-            // }

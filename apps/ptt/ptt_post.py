@@ -70,6 +70,7 @@ def ptt_search():
                              "push": item[3],
                              "author": item[4],
                              "date": item[2].strip()})
+    json["data"] = json["data"][:count]
     json["count"] = len(json["data"])
     json[""] = None
     return jsonify(json)

@@ -46,11 +46,9 @@ const pagination = Vue.createApp({
                     )
                 }
                 if (Math.abs(page - page_n) < 4 && page - page_n >= -1) {
-                    let active
+                    let active = false
                     if (page == page_n) {
                         active = true
-                    } else {
-                        active = false
                     }
                     this.values.push(
                         { click: this.get_post, id: page, active: active, text: page }
