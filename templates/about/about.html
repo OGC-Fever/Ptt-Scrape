@@ -11,32 +11,63 @@
     <div class="h4 text-center">
         side projects just for fun & practice
     </div>
-    <div class="row row-cols-2 g-2">
-        <div class="col">
+    <div class="row row-cols-2 g-2" id="about">
+        <div class="col" v-for="item in items">
             <div class="card text-light bg-dark">
                 <div class="card-body">
-                    <h5 class="card-title">Photo Board</h5>
-                    <li>post and comment photo messages</li>
-                    <li>packages : flask, sqlite3, sqlalchemy, pillow</li>
-                    <li>ajax : scroll down to get more photo</li>
-                    <li>storing all data in sqlite database w/ sqlalchemy</li>
-                    <li>resizing photo in pillow</li>
-                    <a class="stretched-link" href="msg"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card text-light bg-dark">
-                <div class="card-body">
-                    <h5 class="card-title">PTT Scraper</h5>
-                    <li>scraping data from ptt.cc and show on web</li>
-                    <li>packages : BeautifulSoup</li>
-                    <li>ajax : action in one page by jQuery and Vue.js</li>
-                    <a class="stretched-link" href="ptt"></a>
+                    <h5 class="card-title">@item.title@</h5>
+                    <li v-for="text in item.texts">@text@</li>
+                    <a class="stretched-link" :href="item.link"></a>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+{% block script %}
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.7/dist/vue.global.prod.js"></script>
+<script>
+    const about = Vue.createApp({
+        delimiters: ['@', '@'],
+        data() {
+            return {
+                texts: [
+                    [
+                        "post and comment photo messages",
+                        "packages : flask, sqlite3, sqlalchemy, pillow",
+                        "ajax : scroll down to get more photo by jQuery",
+                        "storing all data in sqlite database w/ sqlalchemy",
+                        "resizing photo in pillow"
+                    ],
+                    [
+                        "scraping data from ptt.cc and show on web",
+                        "packages : BeautifulSoup, paramiko",
+                        "fetch online users by paramiko",
+                        "ajax : getting data from backend by jQuery",
+                        "action in one page by Vue.js"
+                    ],
+                    [
+                        "analyse data from ptt.cc and show on web",
+                        "packages : test",
+                        "ajax : action in one page by Vue.js"
+                    ],
+                    [
+                        "test",
+                        "packages : test",
+                        "ajax : action in one page by Vue.js"
+                    ]
+                ],
+                items: [],
+            }
+        },
+        mounted() {
+            this.items = nav.items
+            for (let i = 0; i < this.texts.length; i++) {
+                this.items[i]["texts"] = this.texts[i]
+            }
+        }
+    }).mount('#about')
+
+</script>
+{% endblock %}
 {% endblock %}
