@@ -11,7 +11,6 @@ from apps.msg.msg import *
 from apps.ptt.ptt_get import *
 from apps.ptt.ptt_post import *
 
-
 msg_db.init_app(msg_app)
 msg_db.create_all()
 
@@ -26,7 +25,8 @@ def home():
 
 app.wsgi_app = DispatcherMiddleware(about, {
     "/msg": msg_app,
-    '/ptt': ptt_app
+    '/ptt': ptt_app,
+    # "/food_stand": food_app,
 })
 
 

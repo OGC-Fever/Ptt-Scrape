@@ -1,7 +1,6 @@
 {% extends "template.html" %}
 
 {% block head %}
-{% include "ptt/head.html" %}
 <title>PTT Scraper</title>
 {% endblock %}
 
@@ -104,7 +103,7 @@
 <div id="dummy"></div>
 {% block script %}
 
-<script src="https://cdn.jsdelivr.net/npm/vue@3.0.7/dist/vue.global.prod.js"></script>
+
 <script src="{{ url_for('static',filename='ptt/form.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/table_header.js') }}"></script>
 <script src="{{ url_for('static',filename='ptt/view.js') }}"></script>
