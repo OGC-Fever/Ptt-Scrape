@@ -5,7 +5,6 @@ const nav = Vue.createApp({
             items: [
                 { link: "/msg", title: "Photo Board" },
                 { link: "/ptt", title: "PTT Scraper" },
-                { link: "#", title: "PTT Analyse" },
                 { link: "#", title: "Food Stand POS" },
                 { link: "#", title: "XYZ todo-list" }
             ]

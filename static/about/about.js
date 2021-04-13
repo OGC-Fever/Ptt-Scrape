@@ -18,12 +18,12 @@ const about = Vue.createApp({
                     "action in one page by Vue.js"
                 ],
                 [
-                    "analyse data from ptt.cc and show on web",
+                    "POS for food stand",
                     "packages : test",
                     "ajax : action in one page by Vue.js"
                 ],
                 [
-                    "test",
+                    "city hunter XYZ board fork",
                     "packages : test",
                     "ajax : action in one page by Vue.js"
                 ]
