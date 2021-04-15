@@ -5,7 +5,7 @@ import random
 
 from .form import check_file, dummy_msg, resize_img
 from .msg_db import post
-from config import msg_app
+from config import msg
 
 
 def get_data(page_limit, page):
@@ -19,8 +19,8 @@ def get_data(page_limit, page):
     return data
 
 
-@msg_app.route("/", methods=["GET", "POST"])
-def msg(page=1):
+@msg.route("/", methods=["GET", "POST"])
+def message(page=1):
     if request.method == "GET":  # normal
         data = get_data(page_limit, page)
         return render_template("msg/msg.html", data=data)
@@ -42,7 +42,7 @@ def msg(page=1):
         return redirect(url_for("msg"))
 
 
-@msg_app.route("/more", methods=["POST"])
+@msg.route("/more", methods=["POST"])
 def msg_more():
     page = int(request.form["page"])
     data = get_data(page_limit, page)

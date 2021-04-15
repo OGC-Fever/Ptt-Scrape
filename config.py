@@ -1,12 +1,17 @@
 from flask.app import Flask
 
-msg_app = Flask(__name__)
-msg_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/message.db'
-# msg_app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:"
-msg_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-msg_app.config['JSON_AS_ASCII'] = False
+about = Flask(__name__)
+about.config['JSON_AS_ASCII'] = False
+
+msg = Flask(__name__)
+msg.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/message.db'
+msg.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+msg.config['JSON_AS_ASCII'] = False
 
 
-ptt_app = Flask(__name__)
-ptt_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-ptt_app.config['JSON_AS_ASCII'] = False
+ptt = Flask(__name__)
+ptt.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+ptt.config['JSON_AS_ASCII'] = False
+
+xyz = Flask(__name__)
+xyz.config['JSON_AS_ASCII'] = False

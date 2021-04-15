@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as bs
 import requests
-from config import ptt_app
+from config import ptt
 from flask import render_template, jsonify
 import re
 import paramiko
@@ -21,7 +21,7 @@ def users():
         return data
 
 
-@ptt_app.route("/list", methods=["GET"])
+@ptt.route("/list", methods=["GET"])
 def hot_list():
     url = "https://www.ptt.cc/bbs/index.html"
     res = requests.get(url)
@@ -67,6 +67,6 @@ def get_content(html):
     return data
 
 
-@ptt_app.route("/", methods=["GET"])
+@ptt.route("/", methods=["GET"])
 def ptt_home():
     return render_template("ptt/ptt.html")

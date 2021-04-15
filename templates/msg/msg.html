@@ -3,6 +3,7 @@
 {% block head %}
 <script src="{{ url_for('static',filename='msg/msg_ajax.js') }}"></script>
 <title>Photo Board</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='msg/msg.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -14,7 +15,7 @@
 {% if not data %}
 <div class="content-center">
     <p></p>
-    <p class="text-white text-center">No one leave any message yet.</p>
+    <p class="text-center">No one leave any message yet.</p>
 </div>
 {% else %}
 

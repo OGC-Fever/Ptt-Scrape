@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as bs
 import requests
-from config import ptt_app
+from config import ptt
 from flask import render_template, request, jsonify
 import math
 from .ptt_get import get_content
@@ -35,7 +35,7 @@ def prms_asm(keyword, author, push):
     return prms
 
 
-@ptt_app.route("/search", methods=["POST"])
+@ptt.route("/search", methods=["POST"])
 def ptt_search():
     board = request.form['board']
     keyword = request.form['keyword']

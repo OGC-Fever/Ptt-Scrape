@@ -1,29 +1,25 @@
 {% extends "template.html" %}
 {% block head %}
 <title>About</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='about/about.css') }}">
 
 {% endblock %}
 
 {% block body %}
 
-<div class="mx-auto my-3 text-light col-10">
-    <div class="h4 text-center">
-        side projects just for fun & practice
-    </div>
-    <div class="row row-cols-2 g-2" id="about">
-        <div class="col" v-for="item in items">
-            <div class="card text-light bg-dark">
-                <div class="card-body">
-                    <h5 class="card-title">@item.title@</h5>
-                    <li v-for="text in item.texts">@text@</li>
-                    <a class="stretched-link" :href="item.link"></a>
-                </div>
+<div class="container">
+    <div class="row row-cols-2" id="about">
+        <div class="card border-light bg-light col" v-for="item in items">
+            <div class="card-body">
+                <h5 class="card-title">@item.title@</h5>
+                <li v-for="text in item.texts">@text@</li>
+                <a :href="item.link" class="stretched-link"></a>
             </div>
         </div>
     </div>
 </div>
+
 {% block script %}
- 
 <script src="{{ url_for('static',filename='about/about.js') }}"></script>
 
 {% endblock %}
