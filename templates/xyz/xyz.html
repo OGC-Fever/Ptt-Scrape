@@ -7,50 +7,37 @@
 {% endblock %}
 
 {% block body %}
-<div class="row col-10 outer my-3 mx-auto g-2">
-    <div class="row mx-auto px-0" style="height: 100;">
-        <div class="col inner">3/19</div>
-        <div class="col inner">3/19</div>
-        <div class="col inner">3/19</div>
-        <div class="col inner">3/19</div>
-        <div class="col inner">3/19</div>
-        <div class="col inner">3/19</div>
-        <div class="col inner">3/19</div>
-    </div>
-    <div class="row mx-auto px-0" style="height: 400;">
-        <div class="col inner task">
-            人生中，你會經歷很多艱難的時刻，但這也會讓你意識到以前不曾在意過的好時光
+<div class="container">
+    <div class="row outer my-3" id="cal">
+        <div class="row mx-auto px-0">
+            <div class="col inner" v-for="day in week">@day@</div>
         </div>
-        <div class="col inner task">
-            下一次的人生，我們要多笑一點、多愛一點，我們再也不要這麼害怕了
+        <div class="row mx-auto px-0" v-for="m in 5">
+            <div class="col inner" v-for="n in 7" style="height: 100;">
+                <div v-if="first_day==date">@date@</div>
+            </div>
         </div>
-        <div class="col inner task">
-            恐懼會束縛你的靈魂，希望則釋放你的心靈
-        </div>
-        <div class="col inner task">
-            人生中有些我們很在乎的事情，其實一點價值都沒有
-        </div>
-        <div class="col inner task">
-            你根本不了解什麼是真正的失去，因為那只有在你愛某個東西勝過自己時才能體會
-        </div>
-        <div class="col inner task">
-            不要等到生命快結束了，才發現自己從來沒有真正地活過
-        </div>
-        <div class="col inner task">
-            我們向來概括承受這個現實世界呈現給我們的任何樣貌
-        </div>
-    </div>
-    <div class="row mx-auto px-0" style="height: 100;">
-        <div class="col inner">幹</div>
-        <div class="col inner">幹</div>
-        <div class="col inner">幹</div>
-        <div class="col inner">幹</div>
-        <div class="col inner">幹</div>
-        <div class="col inner">幹</div>
-        <div class="col inner">幹</div>
     </div>
 </div>
-{% block script %}
 
+{% block script %}
+<script>
+    const cal = Vue.createApp({
+        delimiters: ['@', '@'],
+        data() {
+            return {
+                week: ["日", "月", "火", "水", "木", "金", "土"],
+                date: 0,
+                first_day: 0
+            }
+        },
+        mounted() {
+            let month = new Date().getMonth() + 1
+            let year = new Date().getFullYear()
+            this.first_day = new Date(`${month}/1,${year}`).getDay()
+        }
+    }).mount("#cal")
+
+</script>
 {% endblock %}
 {% endblock %}

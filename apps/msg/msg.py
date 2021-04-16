@@ -39,7 +39,7 @@ def message(page=1):
             timg = pack("timg")
             data = post(name=name, msg=msg, image=image, timg=timg)
             data.post()
-        return redirect(url_for("msg"))
+        return redirect(url_for("message"))
 
 
 @msg.route("/more", methods=["POST"])

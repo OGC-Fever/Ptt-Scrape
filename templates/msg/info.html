@@ -1,10 +1,10 @@
 {% extends "template.html" %}
 {% block head %}
-{% include "msg/head.html" %}
+{% include "head.html" %}
 
 <script src="{{ url_for('static',filename='msg/info_modal.js') }}"></script>
 <title>Photo Board</title>
-
+<link rel="stylesheet" href="{{ url_for('static',filename='msg/msg.css') }}">
 {% endblock %}
 {% block body %}
 

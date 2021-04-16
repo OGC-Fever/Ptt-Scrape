@@ -4,17 +4,10 @@
     border-style: solid;
     background-color: darkgreen;
     color: whitesmoke;
-    font-size: larger;
+    font-size: large;
     align-items: center;
     justify-content: center;
     display: flex;
-}
-
-.task {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    writing-mode: vertical-rl;
 }
 
 .outer {
