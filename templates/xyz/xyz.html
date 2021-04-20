@@ -7,26 +7,28 @@
 {% endblock %}
 
 {% block body %}
-<div class="container mx-auto my-3 fs-1" id="title">
-    <div class="text-center row d-flex align-items-center">
-        <i class="col bi bi-caret-left"></i>
-        <div class="col">
-            @title@
+<div id="calendar">
+    <div class="container mx-auto my-2 fs-2">
+        <div class="row text-center d-flex align-items-center">
+            <i class="col bi bi-caret-left"></i>
+            <div class="col">
+                @title@
+            </div>
+            <i class="col bi bi-caret-right"></i>
         </div>
-        <i class="col bi bi-caret-right"></i>
+    </div>
+    <div class="container my-3">
+        <div class="row outer px-0">
+            <div class="row mx-auto px-0">
+                <div class="col inner" v-for="day in week">@day@</div>
+            </div>
+            <div class="px-0">
+                <day :weeks="weeks" :month="month"></day>
+            </div>
+        </div>
     </div>
 </div>
-<div class="container my-3">
-    <div class="row outer px-0">
-        <div class="row mx-auto px-0" id="week">
-            <div class="col inner" v-for="day in week">@day@</div>
-        </div>
-        <div id="day" class="px-0">
-            <day></day>
-        </div>
-    </div>
 
-</div>
 {% block script %}
 <script src="{{ url_for('static',filename='xyz/xyz.js') }}"></script>
 
