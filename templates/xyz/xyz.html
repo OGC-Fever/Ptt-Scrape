@@ -8,36 +8,17 @@
 
 {% block body %}
 <div class="container">
-    <div class="row outer my-3" id="cal">
-        <div class="row mx-auto px-0">
+    <div class="outer my-3">
+        <div class="row mx-auto px-0" id="week">
             <div class="col inner" v-for="day in week">@day@</div>
         </div>
-        <div class="row mx-auto px-0" v-for="m in 5">
-            <div class="col inner" v-for="n in 7" style="height: 100;">
-                <div v-if="first_day==date">@date@</div>
-            </div>
+        <div id="day">
+            <day></day>
         </div>
     </div>
-</div>
 
-{% block script %}
-<script>
-    const cal = Vue.createApp({
-        delimiters: ['@', '@'],
-        data() {
-            return {
-                week: ["日", "月", "火", "水", "木", "金", "土"],
-                date: 0,
-                first_day: 0
-            }
-        },
-        mounted() {
-            let month = new Date().getMonth() + 1
-            let year = new Date().getFullYear()
-            this.first_day = new Date(`${month}/1,${year}`).getDay()
-        }
-    }).mount("#cal")
+    {% block script %}
+    <script src="{{ url_for('static',filename='xyz/xyz.js') }}"></script>
 
-</script>
-{% endblock %}
-{% endblock %}
+    {% endblock %}
+    {% endblock %}
