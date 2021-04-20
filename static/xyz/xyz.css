@@ -1,8 +1,8 @@
 .inner {
-    border-width: 5;
+    border-width: 2;
     border-color: darkgrey;
     border-style: solid;
-    background-color: darkgreen;
+    background-color: darkolivegreen;
     color: whitesmoke;
     font-size: medium;
     align-items:center;

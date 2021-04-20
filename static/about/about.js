@@ -23,7 +23,7 @@ const about = Vue.createApp({
                     "ajax : action in one page by Vue.js"
                 ],
                 [
-                    "city hunter XYZ board fork",
+                    "hand code calendar",
                     "packages : test",
                     "ajax : action in one page by Vue.js"
                 ]

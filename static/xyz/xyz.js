@@ -17,6 +17,12 @@ day.component("day", {
         }
     },
     methods: {
+        alert(n, index) {
+            let input = prompt("schedule:", "")
+            if (input) {
+                this.month[(n - 1) * 7 + index].push(input)
+            }
+        },
         init() {
             let month = new Date().getMonth()
             let year = new Date().getFullYear()
@@ -24,15 +30,16 @@ day.component("day", {
             let last_date = new Date(year, month + 1, 0).getDate()
             let index = 0
             while (index < first_day) {
-                this.month.push("")
+                this.month.push([""])
                 index++
             }
             for (let day = 1; day <= last_date; day++) {
-                this.month.push(day)
+                this.month.push([day])
             }
             while (this.month.length % 7 != 0) {
-                this.month.push("")
+                this.month.push([""])
             }
+            console.log(this.month)
             this.weeks = this.month.length / 7
         }
     },
@@ -41,8 +48,10 @@ day.component("day", {
     },
     template: `
     <div class="row mx-auto" v-for="n in weeks">
-        <div class="col inner date" v-for="(,index) in month.slice(7*n-7,7*n)">
-            @month.slice(7*n-7,7*n)[index]@
+        <div class="col inner date" v-for="(,index) in month.slice(7*n-7,7*n)" @click="alert(n,index)">
+            <div v-for="(,i) in month.slice(7*n-7,7*n)[index]">
+                @month.slice(7*n-7,7*n)[index][i]@
+            </div>
         </div>
     </div>`,
 })
