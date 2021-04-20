@@ -18,3 +18,6 @@ Personal side projects just for fun & practice
 - fetch online users by paramiko
 - ajax : getting data from backend by jQuery
 - action in one page by Vue.js
+
+## XYZ todo-list
+- hand code calendar

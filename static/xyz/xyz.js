@@ -7,6 +7,24 @@ const week = Vue.createApp({
     },
 }).mount("#week")
 
+const title = Vue.createApp({
+    delimiters: ['@', '@'],
+    data() {
+        return {
+            title: ""
+        }
+    },
+    methods: {
+        init() {
+            let title = new Date().toLocaleString("tw", { year: "numeric", month: "long" }).split(" ")
+            return `${title[0]} / ${title[1]}`
+        }
+    },
+    mounted() {
+        this.title = this.init()
+    }
+}).mount("#title")
+
 const day = Vue.createApp({})
 day.component("day", {
     delimiters: ['@', '@'],
@@ -39,7 +57,6 @@ day.component("day", {
             while (this.month.length % 7 != 0) {
                 this.month.push([""])
             }
-            console.log(this.month)
             this.weeks = this.month.length / 7
         }
     },
