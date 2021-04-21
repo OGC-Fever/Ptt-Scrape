@@ -1,5 +1,6 @@
 from apps.ptt_get import *
 from apps.ptt_post import *
+from flask import render_template
 
 from config import ptt
 
