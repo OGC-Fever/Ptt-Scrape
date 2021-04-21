@@ -26,7 +26,7 @@ const ptt_form = Vue.createApp({
         search(page_n = 1) {
             if (this.init_post == 0 || !cond) {
                 $.ajax({
-                    url: "/ptt/search",
+                    url: "/search",
                     type: "POST",
                     dataType: "json",
                     data: this.prms,
