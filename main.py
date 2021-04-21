@@ -1,6 +1,8 @@
 from apps.ptt_get import *
 from apps.ptt_post import *
 
+from config import ptt
+
 
 @ptt.route("/", methods=["GET", "POST"])
 def home():
