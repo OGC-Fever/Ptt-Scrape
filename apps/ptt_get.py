@@ -69,4 +69,4 @@ def get_content(html):
 
 @ptt.route("/", methods=["GET"])
 def ptt_home():
-    return render_template("ptt/ptt.html")
+    return render_template("ptt.html")

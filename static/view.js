@@ -41,7 +41,7 @@ const view_board = Vue.createApp({
         init_load(page_n = 1) {
             if (this.init == 0) {
                 $.ajax({
-                    url: "/ptt/list",
+                    url: "/list",
                     type: "GET",
                     dataType: "json",
                     success: function (json) {
