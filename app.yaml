@@ -7,5 +7,5 @@ handlers:
   secure: always
   script: auto
 
-entrypoint: gunicorn -b :$PORT main:app
+entrypoint: gunicorn -b :$PORT main:ptt
 
