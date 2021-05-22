@@ -12,12 +12,13 @@ def users():
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect("ptt.cc", username="bbsu", password="")
     shell = ssh.invoke_shell()
-    time.sleep(0.1)
+    time.sleep(0.5)
     if shell.recv_ready():
         msg = shell.recv(9999)
         msg = msg.decode("utf8", "ignore")
-        pattern = r"[0-9]{4,6}"
+        pattern = r"[0-9]{5,6}"
         data = re.search(pattern, msg)[0]
+        print(data)
         return data
 
 
