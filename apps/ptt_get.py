@@ -18,7 +18,6 @@ def users():
         msg = msg.decode("utf8", "ignore")
         pattern = r"[0-9]{5,6}"
         data = re.search(pattern, msg)[0]
-        print(data)
         return data
 
 
