@@ -1,5 +1,4 @@
 ## PTT Scraper
-- demo http://orzogc.ddns.net
 - scraping article titles from ptt.cc and show on web
 - packages : BeautifulSoup, paramiko
 - fetch online users by paramiko
